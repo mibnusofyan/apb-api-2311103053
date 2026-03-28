@@ -101,7 +101,7 @@ app.put("/posts/:id", (req, res) => {
 
 app.delete("/posts/:id", (req, res) => {
   const { id } = req.params;
-  db.query("DELETE posts WHERE id=?", [id], (err) => {
+  db.query("DELETE FROM posts WHERE id=?", [id], (err) => {
     if (err) throw err;
     res.json({ message: "Post deleted successfully" });
   });
