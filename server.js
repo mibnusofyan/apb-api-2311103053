@@ -133,6 +133,16 @@ app.delete("/likes/:id", (req, res) => {
   });
 });
 
+// Comments routes
+app.post("/comments", (req, res) => {
+  const { user_id, post_id, content } = req.body;
+  const sql = "INSERT INTO comments (user_id, post_id, content) VALUES (?, ?, ?)";
+  db.query(sql, [user_id, post_id, content], (err, result) => {
+    if (err) throw err;
+    res.json({ message: "Comment added successfully", id: result.insertId });
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
