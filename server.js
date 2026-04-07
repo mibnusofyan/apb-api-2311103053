@@ -151,6 +151,14 @@ app.delete("/comments/:id", (req, res) => {
   });
 });
 
+app.get("/postcomments/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("SELECT * FROM comments WHERE post_id=?", [id], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
