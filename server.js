@@ -115,6 +115,16 @@ app.get("/userposts/:id", (req, res) => {
   });
 });
 
+// Likes routes
+app.post("/likes", (req, res) => {
+  const { user_id, post_id } = req.body;
+  const sql = "INSERT INTO likes (user_id, post_id) VALUES (?, ?)";
+  db.query(sql, [user_id, post_id], (err, result) => {
+    if (err) throw err;
+    res.json({ message: "Like added successfully", id: result.insertId });
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
