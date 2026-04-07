@@ -143,6 +143,14 @@ app.post("/comments", (req, res) => {
   });
 });
 
+app.delete("/comments/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("DELETE FROM comments WHERE id=?", [id], (err) => {
+    if (err) throw err;
+    res.json({ message: "Comment deleted successfully" });
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
