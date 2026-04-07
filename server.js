@@ -125,6 +125,14 @@ app.post("/likes", (req, res) => {
   });
 });
 
+app.delete("/likes/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("DELETE FROM likes WHERE id=?", [id], (err) => {
+    if (err) throw err;
+    res.json({ message: "Like deleted successfully" });
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
